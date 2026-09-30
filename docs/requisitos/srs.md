@@ -267,6 +267,7 @@ para conservar la procedencia de la definición. El catálogo de requisitos podr
 enlazar a los términos de esta sección, pero no los definirá de nuevo.
 
 | Término | Definición en Proyecto Simbiosis | Fuente |
+| :--- | :--- | :--- |
 | **Enfermedad Inflamatoria Intestinal (EII)** | Condición de salud de los pacientes a los que se dirige la plataforma. El sistema busca ayudar a estas personas a controlar sus síntomas a través de una alimentación adecuada y del apoyo comunitario. | Documento de Visión y Alcance (Sección 1.2) / Acta de captura de requisitos (Sección 1) |
 | **Paciente** | Usuario principal con Enfermedad Inflamatoria Intestinal (EII). Puede registrarse en la plataforma (sin requerir aprobación adicional tras verificar su correo), publicar recetas, gestionar sus datos de salud autorizados y participar en el foro y comunidad. | Acta de captura de requisitos (Sección 1.2, 2) / Documento de Visión y Alcance (Sección 3.1) |
 | **Cuidador** | Familiar o profesional que asiste a un paciente en la gestión de su dieta. Su registro requiere la aprobación y aceptación del paciente al que se asocie. Puede acceder únicamente a los datos de salud expresamente autorizados por el paciente y proponer recetas. | Acta de captura de requisitos (Sección 1.2, 2) / Documento de Visión y Alcance (Sección 3.1) |
@@ -278,6 +279,7 @@ enlazar a los términos de esta sección, pero no los definirá de nuevo.
 | **Publicaciones de salud** | Artículos breves creados por nutricionistas sobre alimentación y hábitos de vida saludables dirigidos a los pacientes y cuidadores. Pueden comentarse, pero no reciben valoraciones numéricas ni requieren validación previa. | Acta de captura de requisitos (Sección 5) / Documento de Visión y Alcance (Sección 2.2) |
 | **Datos de salud** | Información fisiológica y de salud aportada opcionalmente por el paciente. Tienen carácter privado y tratamiento normativo reforzado (RGPD / LOPDGDD). Se utilizan exclusivamente para personalizar la búsqueda de recetas acordes al perfil. | Acta de captura de requisitos (Sección 1.1, 2, 7.1) / Documento de Visión y Alcance (Sección 2.5) |
 | **Guía interactiva** | Funcionalidad de ayuda inicial y contextual presente en las pantallas del sistema para facilitar el aprendizaje y uso eficiente de la plataforma por parte de los usuarios. Es omitible y no incluye asistente conversacional. | Acta de captura de requisitos (Sección 6) / Documento de Visión y Alcance (Sección 2.2, 3.3) |
+
 
 ## 10. Modelos de análisis
 
