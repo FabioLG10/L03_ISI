@@ -279,6 +279,11 @@ FR-017 se conserva para no perder el identificador histórico, pero su estado es
 | ID | Categoría y atributo | Requisito no funcional | Ámbito (Global/Local) | UR/FR relacionados | Método de comprobación | Estado |
 | --- | --- | --- | --- | --- | --- | --- |
 | NFR-07 |NFR-Q (Eficiencia; Escalabilidad; Mantenibilidad) |La plataforma mantendrá los objetivos de capacidad y rendimiento definidos para la primera versión sin intervención manual del personal de la organización.| G | -  | Prueba de carga automatizada con 100 usuarios concurrentes y 10 operaciones/s durante 30 min; comprobar mediante registros de monitorización, ausencia de intervención manual. | - |
+| --- | --- | --- | --- | --- | --- | --- |
+| NFR-02 |NFR-I(Interfaz externa)|La plataforma debe permitir iniciar sesión a través de google, mediante OAuth 2.0 u OpenID Connect sobre HTTPS.| L | UR-02| - | - |
+| NFR-03 |NFR-R(Entorno y compatibilidad)|El usuario interactuará con la plataforma a través de una interfaz web responsiva sin aplicación nativa.| G | - | El acceso a la plataforma a través de distintos dispositivos para comprobar su adaptación. | - |
+| NFR-04 |NFR-Q(Disponibilidad)|El sistema La plataforma ofrecerá servicio durante las 24 horas del día, con una disponibilidad mínima del 99,5 % en cada mes natura todos los días de la semana. | G | - |Se realizará una carga pesada de usuarios para comprobar la consistencia de la plataforma.| - |
+| NFR-05 |NFR-Q(Integridad)|El sistema debe realizar una copia diaria de los datos del usuario. | G | - | Se realizarán pruebas y simulacros de migración para ver si los datos se copian y guardan correctamente. | - |
 
 Categorías y atributos: 
 1) Requisitos de calidad (NFR-Q): Rendimiento, Usabilidad, Seguridad, Fiabilidad, Disponibilidad, Modificabilidad, Portabilidad, Eficiencia, Escalabilidad, Verificabilidad / Testabilidad, Robustez, Seguridad funcional (safety), Integridad, Reusabilidad, Instalabilidad.
