@@ -54,8 +54,8 @@ Registra los casos que aparecen en el modelo. Asigna a cada caso un identificado
 | UC-09 |	Actualizar perfil |	Modificar datos personales y preferencias.| Usuario registrado |
 | UC-10 |	Gestionar cuentas |	Listar, suspender y eliminar cuentas de usuario.| Coordinador |
 | UC-11 |	Registrar auditoría| Registrar fecha, hora y acción de cada aprobación, suspensión o eliminación de cuentas.|	Sin actor principal propio |
-El actor principal es el que busca el objetivo e inicia la interacción y el servicio de correo es actor de apoyo en UC-01 y UC-03.
 
+El actor principal es el que busca el objetivo e inicia la interacción y el servicio de correo es actor de apoyo en UC-01 y UC-03.
 Esta distinción se establece para cada caso de uso. Un mismo actor puede desempeñar funciones diferentes en distintos casos. No es necesario asignar un actor principal independiente a cada caso incluido.
 
 Al ampliar el modelo, conserva los casos anteriores que sigan siendo válidos. Si revisas un caso, conserva su identificador cuando siga representando el mismo objetivo. No reutilices el identificador de un caso retirado para un caso diferente.
@@ -72,7 +72,7 @@ Para cada vista, incluye un título, una frase sobre su alcance y el diagrama. T
 
 **Alcance:** Funciones del apartado 4 del plan de E1. Cobertura parcial(1).
 
-[Inserta aquí el diagrama.]
+![Casos de uso de acceso cuentas y ayuda](imagenes/casos-de-uso-acceso-cuentas-ayuda-e1.png)
 
 Si una decisión necesita aclaración, puedes añadir una nota breve junto al diagrama.
 
