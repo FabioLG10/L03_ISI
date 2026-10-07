@@ -74,7 +74,6 @@ Para cada vista, incluye un título, una frase sobre su alcance y el diagrama. T
 
 ![Casos de uso de acceso cuentas y ayuda](imagenes/casos-de-uso-acceso-cuentas-ayuda-e1.png)
 
-Si una decisión necesita aclaración, puedes añadir una nota breve junto al diagrama.
 
 **Nombre y ubicación de la imagen.** Guarda las imágenes en `docs/modelos/imagenes/`. Usa este patrón:
 
