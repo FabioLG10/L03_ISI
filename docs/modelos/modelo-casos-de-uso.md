@@ -2,9 +2,9 @@
 
 | Versión | Fecha | Estado |
 | --- | --- | --- |
-| 1.6 | 11/10/2026 | Revisado |
+| 1.7 | 14/10/2026 | Borrador |
 
-**Iteración de referencia:** E1. Este documento recoge la primera vista revisada del modelo. Será el punto de partida para ampliarlo en E2.
+**Iteración de referencia:** E2. Este documento recoge la vista revisada de E1 y la vista de salud y recetas de E2.
 
 **Plantilla base:** [Plantilla del modelo de casos de uso](plantilla-modelo-casos-de-uso.md). La plantilla se conserva sin cumplimentar. Los resultados del proyecto se incorporan a este documento.
 
@@ -23,13 +23,18 @@ La verificación del correo, la aprobación de una cuenta por el coordinador y l
 El modelo no completa los módulos de Gestión de usuarios y Guía interactiva. Quedan pendientes las siguientes funciones:
 
 - El registro, el acceso y la vinculación con Google.
-- El uso del alias en los espacios públicos. E1 establece el alias durante el registro.
+- El uso del alias en los espacios públicos distintos de los de recetas. E1 establece el alias durante el registro y E2 lo aplica en los espacios públicos de recetas.
 - La ayuda sobre las funciones todavía no representadas, el progreso entre sesiones, la multimedia y la búsqueda de temas.
 - El bloqueo temporal y la expulsión por infracciones.
 - El fin de las relaciones de cuidado y la gestión automática de cuentas de cuidador sin pacientes.
-- Las funciones de salud, recetas, foro, publicaciones y moderación de contenidos.
+- Las funciones de foro, publicaciones y moderación de contenidos, y las funciones de salud y recetas no seleccionadas para E2.
 
 Los aplazamientos conservan los requisitos del proyecto. El modelo recoge las funciones seleccionadas para el trabajo de requisitos de E1, aunque algunas queden fuera de su prototipo.
+La vista de E2 representa las funciones del apartado 4 del [plan de E2](../planificacion/plan-iteracion-e2.md). Cubre parte de UR-05, UR-06, UR-08, UR-01 y UR-12. Incluye el registro y la consulta de datos de salud, su exportación, la autorización y revocación del acceso de nutricionistas, la invitación a un nutricionista sin cuenta y la autorización del acceso de un cuidador. Incluye también la creación, propuesta, publicación y validación de recetas, la gestión de las recetas propias, la búsqueda con filtros, el filtrado por alergias e intolerancias y la consulta del detalle de una receta.
+
+La verificación del correo, la aprobación profesional, la aceptación de una relación de cuidado, la autorización de acceso a datos y la validación de una receta son condiciones distintas. Ninguna sustituye a las demás.
+
+Quedan pendientes los recordatorios y las alertas de salud, la calculadora nutricional, las estadísticas completas de recetas, la ordenación por popularidad, las recomendaciones, las funciones basadas en actividad previa, las listas y favoritas, el foro y las valoraciones. El modelo registra la dependencia de FR-089 con las valoraciones sin incorporar UR-11.
 
 ## 2 Actores
 
@@ -43,7 +48,7 @@ Un actor representa un rol externo que interactúa con Proyecto Simbiosis. Una m
 | Cuidador | Usuario registrado que solicita o mantiene relaciones de cuidado con pacientes. |
 | Nutricionista | Usuario registrado con perfil profesional sujeto a la aprobación de su documentación. |
 | Coordinador | Usuario registrado que consulta el listado de cuentas y aprueba, suspende o elimina cuentas dentro de sus permisos. |
-| Servicio de correo electrónico | Sistema externo que presta el servicio de envío de mensajes de verificación y restablecimiento. |
+| Servicio de correo electrónico | Sistema externo que presta el servicio de envío de mensajes de verificación, restablecimiento e invitación. |
 
 **Generalizaciones.** Usuario registrado especializa a Usuario. Paciente, Cuidador, Nutricionista y Coordinador especializan a Usuario registrado. Cada actor especializado hereda la participación del actor general en sus casos de uso.
 
@@ -52,7 +57,7 @@ Usuario registrado se representa como actor abstracto para agrupar las funciones
 Cuidador y Nutricionista no tienen asociaciones exclusivas en esta vista. Participan mediante las funciones heredadas. Las condiciones de solicitud de esos perfiles se estudian dentro del registro. El Servicio de correo electrónico es un actor de apoyo y no pertenece a la jerarquía de usuarios.
 
 El registro de auditoría forma parte del comportamiento del sistema. No requiere un actor adicional ni una interacción directa del Coordinador con UC-35.
-
+La vista de E2 reutiliza los actores de E1. Paciente participa en el registro, la consulta y la exportación de sus datos y en las autorizaciones de acceso. Cuidador y Nutricionista consultan los datos que el paciente les autoriza. Paciente y Cuidador proponen recetas, y Nutricionista las valida o las publica directamente. Usuario registrado agrupa las funciones comunes de recetas. El Servicio de correo electrónico participa también en la invitación a un nutricionista, mediante UC-11. El Coordinador no interviene en esta vista.
 ## 3 Casos de uso
 
 Los objetivos de esta tabla son resúmenes. Las descripciones detalladas quedan pendientes en el apartado 6.
@@ -66,7 +71,7 @@ Los objetivos de esta tabla son resúmenes. Las descripciones detalladas quedan 
 | UC-05 | Actualizar perfil | Modificar los datos personales y las preferencias de la cuenta propia. | Principal: Usuario registrado. |
 | UC-06 | Eliminar cuenta propia | Eliminar la cuenta propia tras comprobar la identidad con la contraseña actual. | Principal: Usuario registrado. |
 | UC-07 | Autorizar relación de cuidado | Dar autorización expresa para activar una relación de cuidado concreta. | Principal: Paciente. |
-| UC-09 | Consultar ayuda | Consultar las instrucciones y los temas de ayuda de las funciones seleccionadas. | Principal: Usuario. |
+| UC-09 | Consultar ayuda | Consultar las instrucciones y los temas de ayuda de las funciones seleccionadas, incluidos la búsqueda y la publicación de recetas. | Principal: Usuario. |
 | UC-10 | Recorrer bienvenida | Conocer las funciones básicas mediante el recorrido del primer acceso, con la posibilidad de omitirlo. | Principal: Usuario registrado. |
 | UC-11 | Enviar correo electrónico | Enviar el mensaje que necesita el caso de uso que lo incluye. | Apoyo: Servicio de correo electrónico. No se asigna un actor principal independiente. |
 | UC-31 | Aprobar cuenta de cuidador o nutricionista | Aprobar una cuenta solicitada con perfil de cuidador o nutricionista, conforme a las condiciones del perfil. | Principal: Coordinador. |
@@ -74,7 +79,20 @@ Los objetivos de esta tabla son resúmenes. Las descripciones detalladas quedan 
 | UC-33 | Eliminar cuenta de usuario | Eliminar una cuenta de usuario y conservar el contenido publicado cuando corresponda a un cuidador. | Principal: Coordinador. |
 | UC-34 | Consultar listado de cuentas de usuario | Consultar las cuentas y su información básica: nombre, correo, rol y estado. | Principal: Coordinador. |
 | UC-35 | Registrar acción en el historial de auditoría | Registrar la fecha, la hora y la acción realizada al aprobar, suspender o eliminar una cuenta. | Sin participación directa de un actor. Comportamiento incluido en UC-31, UC-32 y UC-33. |
-
+| UC-12 | Registrar datos de salud | Introducir manualmente datos fisiológicos, resultados de laboratorio con sus unidades y notas de síntomas. | Principal: Paciente. |
+| UC-13 | Consultar historial de salud | Consultar el historial de datos fisiológicos, del más reciente al más antiguo, con filtro por tipo de dato y gráficas, y exportarlo en PDF o CSV. | Principal: Paciente. |
+| UC-14 | Autorizar acceso de nutricionista a datos de salud | Autorizar a un nutricionista concreto a consultar los datos de salud, tras validar su identidad. | Principal: Paciente. |
+| UC-15 | Invitar a nutricionista sin cuenta | Invitar por correo a registrarse a un nutricionista que no tiene cuenta. La invitación no concede acceso a datos de salud. | Principal: Paciente. Apoyo: Servicio de correo electrónico, mediante UC-11. |
+| UC-16 | Revocar acceso de nutricionista | Retirar en cualquier momento la autorización concedida a un nutricionista. | Principal: Paciente. |
+| UC-17 | Autorizar acceso de cuidador a datos de salud | Autorizar al cuidador a consultar los datos de salud que el paciente decida compartir. | Principal: Paciente. |
+| UC-18 | Consultar datos de salud de un paciente | Consultar los datos de salud de un paciente que han sido autorizados. | Principal: Nutricionista y Cuidador. |
+| UC-19 | Crear receta | Crear una receta con sus datos obligatorios, imágenes o vídeos admitidos, categorías y etiquetas. | Principal: Usuario registrado. |
+| UC-20 | Proponer receta para validación | Proponer una receta creada, que queda pendiente de validación. | Principal: Paciente y Cuidador. |
+| UC-21 | Publicar receta como validada | Publicar directamente como validada una receta creada por un nutricionista con perfil aprobado. | Principal: Nutricionista. |
+| UC-22 | Validar receta propuesta | Revisar una receta propuesta y validarla, tras lo cual se publica como validada. | Principal: Nutricionista. |
+| UC-23 | Gestionar recetas propias | Editar, eliminar con confirmación y consultar el historial de las recetas propias. | Principal: Usuario registrado. |
+| UC-24 | Buscar recetas | Buscar recetas por palabras clave, ingredientes o autor, con exclusión de ingredientes, filtros combinables y ordenación, y consultar el detalle de una receta. | Principal: Usuario registrado. |
+| UC-25 | Filtrar recetas por alergias e intolerancias | Excluir de los resultados las recetas incompatibles con las alergias e intolerancias declaradas en el perfil. | Principal: Usuario registrado. |
 UC-03 se representa como una subfunción de apoyo. Tener una sesión válida es una condición previa de las funciones protegidas. Esto no implica ejecutar UC-03 cada vez que se realiza una de ellas.
 
 UC-04 requiere una cuenta, pero no una sesión iniciada. UC-02 representa la acción de verificar el correo; recibir el mensaje de UC-11 no equivale a verificarlo.
@@ -88,6 +106,14 @@ UC-32 representa la suspensión administrativa seleccionada para E1. No incorpor
 UC-33 se distingue de UC-06 Eliminar cuenta propia. En UC-33, el Coordinador actúa sobre una cuenta de usuario. En UC-06, el titular actúa sobre su propia cuenta.
 
 UC-35 es una subfunción compartida. No representa una operación que el Coordinador inicie por separado.
+
+UC-17 autoriza el acceso a datos de salud y se distingue de UC-07, que activa la relación de cuidado. Una relación activa no concede acceso automático a todos los datos del paciente.
+
+UC-15 no concede acceso: el nutricionista debe verificar su correo, completar la verificación profesional y contar con la autorización de UC-14.
+
+UC-21 y UC-22 exigen un perfil de nutricionista aprobado, conforme a FR-191. Una receta propuesta en UC-20 no se publica hasta que se valida en UC-22.
+
+UC-24 requiere registro e inicio de sesión, conforme a FR-119 y al acta de requisitos generales. El autor se muestra con su alias, conforme a la parte de FR-192 sobre recetas.
 
 ## 4 Diagramas del modelo
 
@@ -111,6 +137,17 @@ El inicio de sesión no se incluye en todos los casos protegidos. La comprobaci�
 
 La imagen se conserva en el repositorio con el nombre usado para esta referencia. Las revisiones de esta vista actualizarán el mismo archivo. Las nuevas vistas tendrán archivos distintos, de acuerdo con la [guía de modelos](README.md).
 
+### 4.2 Vista de salud y recetas de E2
+
+**Frontera del sistema:** Proyecto Simbiosis.
+
+**Alcance:** Registro, consulta y exportación de datos de salud, acceso autorizado de nutricionistas y cuidadores, creación y validación de recetas, y búsqueda y consulta. La vista contiene cinco actores y los casos UC-12 a UC-25, con UC-11 reutilizado de E1.
+
+![Vista de salud y recetas de E2](imagenes/casos-de-uso-salud-recetas-e2.png)
+
+**Relaciones entre casos de uso.** UC-15 extiende UC-14 cuando el nutricionista indicado no tiene cuenta. UC-15 incluye UC-11, como UC-01 y UC-04 en E1. UC-20 y UC-21 extienden UC-19: la receta de un paciente o un cuidador queda pendiente, y la de un nutricionista aprobado se publica como validada. UC-25 extiende UC-24 cuando el perfil declara alergias o intolerancias.
+
+La vista no usa generalizaciones entre casos de uso. No incluye a Usuario ni a Coordinador, porque ninguno participa en estos casos.
 ## 5 Respaldo en los requisitos
 
 Los identificadores remiten al [catálogo canónico de requisitos](../requisitos/catalogo-requisitos.md), versión 1.13, y a la [SRS](../requisitos/srs.md), versión 0.14. UR identifica un requisito de usuario; FR, un requisito funcional; NFR, un requisito no funcional.
@@ -124,25 +161,41 @@ Los identificadores remiten al [catálogo canónico de requisitos](../requisitos
 | UC-05 Actualizar perfil | UR-03; FR-019 | NFR-010 | Edición de datos personales y preferencias. El alias y el correo no se pueden modificar. |
 | UC-06 Eliminar cuenta propia | UR-03; FR-020; UR-13; FR-211 | NFR-010 | Comprobación de la contraseña actual. El contenido publicado por un cuidador se conserva tras eliminar su cuenta. |
 | UC-07 Autorizar relación de cuidado | UR-01; FR-193 y FR-194 | NFR-010 | Cada paciente autoriza su relación antes de que se active. |
-| UC-09 Consultar ayuda | UR-12; FR-172, parte de FR-173, FR-174, FR-175, FR-176 y FR-177 | NFR-010 | Ayuda sobre las funciones de E1, con navegación, elementos visuales, pausa, reanudación, cierre y adaptación a la sección. |
+| UC-09 Consultar ayuda | UR-12; FR-172, parte de parte de FR-173 sobre las funciones de E1 y sobre la búsqueda y la publicación de recetas, FR-174, FR-175, FR-176 y FR-177 | NFR-010 | Ayuda sobre las funciones de E1, con navegación, elementos visuales, pausa, reanudación, cierre y adaptación a la sección. |
 | UC-10 Recorrer bienvenida | UR-12; FR-207 | NFR-010 | Recorrido del primer acceso, que se puede omitir y es independiente de la ayuda contextual. |
-| UC-11 y sus inclusiones | UR-01 y UR-02; FR-003 y FR-016 | — | Envío compartido de los mensajes de verificación y restablecimiento. El servicio externo participa en el envío. |
+| UC-11 y sus inclusiones | UR-01 y UR-02; FR-003 y FR-016; acta de UR-05, apartado 2.6 | — | Envío compartido de los mensajes de verificación, restablecimiento e invitación. El servicio externo participa en el envío. |
 | UC-31 Aprobar cuenta de cuidador o nutricionista | UR-13; FR-181; condición profesional de UR-01 en FR-191 | NFR-010 | El Coordinador aprueba cuentas de cuidador y nutricionista. La aprobación de la documentación profesional condiciona las funciones de publicación del nutricionista. |
 | UC-32 Suspender cuenta de usuario activa | UR-13; FR-182 | NFR-010 | El Coordinador puede suspender cuentas de usuario activas. Los efectos concretos de la suspensión siguen pendientes de aclaración. |
 | UC-33 Eliminar cuenta de usuario | UR-13; FR-183 y FR-211 | NFR-010 | El Coordinador puede eliminar cuentas. El contenido publicado por un cuidador se conserva tras eliminar su cuenta. |
 | UC-34 Consultar listado de cuentas de usuario | UR-13; FR-184 | NFR-010 | El listado permite consultar todas las cuentas e incluye nombre, correo, rol y estado. |
 | UC-35 y sus inclusiones desde UC-31, UC-32 y UC-33 | UR-13; FR-185 | — | El sistema registra la fecha, la hora y la acción cada vez que el Coordinador aprueba, suspende o elimina una cuenta. Las tres inclusiones representan este comportamiento común. |
 | Generalizaciones de actores | UR-13; FR-212 | — | Los perfiles comparten funciones. Una cuenta puede tener a la vez los perfiles de Paciente y Cuidador. |
+| UC-12 Registrar datos de salud | UR-05; FR-041, FR-042 y FR-053 | NFR-010 | Datos fisiológicos, laboratorio con unidades y notas de 500 caracteres. La corrección de datos erróneos depende del acta de UR-05. |
+| UC-13 Consultar historial de salud | UR-05; FR-047, FR-048, FR-049, FR-050 y FR-216 | NFR-010 | Historial ordenado, filtro por tipo de dato, gráficas y exportación en PDF y CSV. |
+| UC-14 Autorizar acceso de nutricionista a datos de salud | UR-05; FR-045 y FR-046 | NFR-010 | Autorización de nutricionistas concretos con validación de identidad. |
+| UC-15 Invitar a nutricionista sin cuenta | Acta de UR-05, apartado 2.6 | NFR-010 | Sin FR propio. Falta aclarar la respuesta si falla el envío. |
+| UC-16 Revocar acceso de nutricionista | UR-05; FR-198 | NFR-010 | Revocación en cualquier momento. Su aplicación a sesiones iniciadas sigue pendiente. |
+| UC-17 Autorizar acceso de cuidador a datos de salud | UR-05; FR-201; FR-208 | NFR-010 | Solo los datos que decide compartir el paciente. FR-208 retira el acceso al terminar la asociación. Qué datos puede consultar cada cuidador sigue pendiente. |
+| UC-18 Consultar datos de salud de un paciente | UR-05; FR-045 y FR-201 | NFR-010 | Consulta limitada a los datos autorizados. |
+| UC-19 Crear receta | UR-06; FR-054, FR-056, FR-057, FR-058, FR-059 y FR-060 | NFR-010 | Datos obligatorios, imágenes JPEG o PNG, vídeos MP4 de hasta 100 MB, categorías y etiquetas. |
+| UC-20 Proponer receta para validación | UR-06; FR-204 | NFR-010 | La receta queda pendiente. Su visibilidad sigue pendiente de aclarar. |
+| UC-21 Publicar receta como validada | UR-06; FR-055 y FR-066; FR-191 | NFR-006 y NFR-010 | Publicación directa por un nutricionista aprobado, con insignia. |
+| UC-22 Validar receta propuesta | UR-06; FR-205 y FR-066; FR-191 | NFR-010 | Tras la validación, se publica como validada. |
+| UC-23 Gestionar recetas propias | UR-06; FR-061, FR-062 y FR-063 | NFR-010 | Edición con registro, eliminación con confirmación e historial. El efecto de editar una receta validada sigue pendiente. |
+| UC-24 Buscar recetas | UR-08; FR-085 a FR-093, FR-095, FR-096, FR-099, FR-103 y FR-119; FR-192 (parte de recetas) | NFR-005 y NFR-010 | Búsqueda, filtros combinables, ordenación y detalle. Requiere registro e inicio de sesión. La calificación promedio de FR-089 depende de valoraciones, fuera de E2. |
+| UC-25 Filtrar recetas por alergias e intolerancias | UR-08; FR-094 | NFR-010 | Cómo se relaciona el perfil con los ingredientes sigue pendiente. |
 
 FR-194 exige la autorización expresa de cada paciente antes de activar su relación de cuidado. UC-07 representa esa autorización. La aprobación de la cuenta en UC-31 no la sustituye.
 
 NFR-003 y NFR-014 condicionan los idiomas de la interfaz. Los demás NFR pertinentes para E1 se recogen en el apartado 6 de su plan. Estas condiciones no originan automáticamente casos de uso ni quedan verificadas por dibujar el modelo.
-
+La relación de NFR-005 y NFR-006 con FR concretos sigue pendiente en el catálogo. Su mención en UC-21 y UC-24 indica los recorridos que el plan de E2 propone medir y no actualiza la trazabilidad canónica.
 ## 6 Descripciones de los casos de uso
 
 **Pendiente.** E1 tiene como producto principal el diagrama de la primera vista. Los objetivos del apartado 3 no son descripciones detalladas. Estas se incorporarán cuando se trabajen los casos seleccionados para ese nivel de detalle, con el esquema de la [plantilla base](plantilla-modelo-casos-de-uso.md#6-descripciones-de-los-casos-de-uso).
 
 UC-31 a UC-35 disponen de un resumen de objetivo y participantes en el apartado 3. Sus descripciones detalladas quedan pendientes. La descomposición de UC-08 no exige desarrollarlas en esta revisión.
+
+UC-12 a UC-25 disponen de un resumen de objetivo y participantes en el apartado 3. Sus descripciones detalladas quedan pendientes y se trabajarán en L06. Antes de completar los escenarios afectados, hay que aclarar las cuestiones del apartado 4.6 del plan de E2, que se recogen en el apartado 7.
 
 Antes de completar los escenarios afectados, hay que aclarar los estados de las cuentas, las condiciones de aprobación y los efectos de la suspensión. También hay que aclarar el tratamiento de un fallo de envío y las condiciones de los enlaces de verificación y restablecimiento. Son preguntas pendientes del plan de E1. No se dan por resueltas en este documento.
 
@@ -187,3 +240,16 @@ E2 partirá de este documento y del [plan de E2](../planificacion/plan-iteracion
 El modelo recoge resultados del trabajo de requisitos. La arquitectura, el prototipo, las pruebas y la evaluación de E1 se registran en sus documentos correspondientes.
 
 Git conservará las revisiones que se registren en commits, junto con sus imágenes. La referencia al commit de cierre se anotará en la evaluación de la iteración, de acuerdo con la [guía de modelos](README.md).
+
+E2 añade la vista de salud y recetas, con los casos UC-12 a UC-25, y reutiliza los actores de E1 relacionados con ella y UC-11. UC-09 amplía su alcance con los temas de búsqueda y publicación de recetas y conserva su identificador. Los casos de E1 no se retiran ni se renumeran.
+
+Quedan pendientes las funciones aplazadas del apartado 1 y las descripciones detalladas, previstas para L06. Se conservan sin resolver las preguntas del apartado 4.6 del plan de E2:
+
+- Qué datos puede consultar cada cuidador y cómo selecciona el paciente los datos que comparte.
+- Cómo se representa la autorización y cómo se aplica su revocación a nuevas consultas.
+- Qué respuesta se ofrece al paciente si falla el envío de la invitación al nutricionista.
+- Qué visibilidad tiene una receta pendiente y qué ocurre con su validación cuando se edita.
+- Qué información de alergias e intolerancias se utiliza para filtrar y cómo se relaciona con los ingredientes.
+- Qué resultado se muestra si faltan datos del perfil, faltan datos de una receta o no hay coincidencias.
+
+La arquitectura, el prototipo, las pruebas y la evaluación de E2 se registran en sus documentos correspondientes.
