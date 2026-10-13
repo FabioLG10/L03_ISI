@@ -93,6 +93,7 @@ Los objetivos de esta tabla son resúmenes. Las descripciones detalladas quedan 
 | UC-23 | Gestionar recetas propias | Editar, eliminar con confirmación y consultar el historial de las recetas propias. | Principal: Usuario registrado. |
 | UC-24 | Buscar recetas | Buscar recetas por palabras clave, ingredientes o autor, con exclusión de ingredientes, filtros combinables y ordenación, y consultar el detalle de una receta. | Principal: Usuario registrado. |
 | UC-25 | Filtrar recetas por alergias e intolerancias | Excluir de los resultados las recetas incompatibles con las alergias e intolerancias declaradas en el perfil. | Principal: Usuario registrado. |
+
 UC-03 se representa como una subfunción de apoyo. Tener una sesión válida es una condición previa de las funciones protegidas. Esto no implica ejecutar UC-03 cada vez que se realiza una de ellas.
 
 UC-04 requiere una cuenta, pero no una sesión iniciada. UC-02 representa la acción de verificar el correo; recibir el mensaje de UC-11 no equivale a verificarlo.
