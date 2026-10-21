@@ -2,7 +2,7 @@
 
 | Versión | Fecha | Estado |
 | --- | --- | --- |
-| 2.4 | 19/10/2026 | Revisado |
+| 2.5 | 21/10/2026 | Borrador |
 
 **Iteración de referencia:** E2. Este documento recoge el modelo acumulado después de incorporar la vista de salud y recetas.
 
@@ -207,7 +207,7 @@ NFR-002, NFR-003, NFR-008, NFR-009 y NFR-014 condicionan los datos, la recuperac
 
 ## 6 Descripciones de los casos de uso
 
-**Estado de la especificación.** Las descripciones detalladas de UC-05 y UC-21 están pendientes de elaboración. Las actas aprobadas definen el comportamiento acordado y delimitan el alcance de estas descripciones.
+**Estado de la especificación.** Las descripciones detalladas de UC-05 y UC-21 están elaboradas en los apartados 6.1 y 6.2. Las demás funciones del modelo siguen pendientes de descripción.
 
 **Alcance de las descripciones.** Las actas aprobadas de UC-05 y UC-21, v1.1, complementan el catálogo y concretan el siguiente alcance:
 
@@ -223,47 +223,56 @@ Los apartados 6.1 y 6.2 corresponden a las descripciones detalladas de UC-05 y U
 
 ### 6.1 Descripción detallada UC-05 — Actualizar perfil
 
-**Identificador y nombre del caso de uso:** [Indica el caso.]
+**Identificador y nombre del caso de uso:** UC-05 Actualizar perfil
 
-**Objetivo:** [Explica qué resultado pretende obtener el participante.]
+**Objetivo:** Modificar y guardar los datos personales, los datos de contacto y las preferencias dietéticas de la cuenta propia.
 
-**Participantes:** [Indica el actor principal y los actores de apoyo, si los hay.]
+**Participantes:** Principal: Usuario registrado. Sin actores de apoyo.
 
-**Precondiciones:** [Indica qué se da por cumplido al comenzar. Las comprobaciones que realiza el sistema pertenecen al flujo.]
+**Precondiciones:**
+- El Usuario registrado tiene una cuenta activa y ha iniciado sesión.
 
-**Inicio:** [Indica qué acción o suceso inicia el caso.]
+**Inicio:** El Usuario registrado solicita actualizar su perfil.
 
-**Escenario principal de éxito:** [Describe la secuencia entre los participantes y el sistema.]
+**Escenario principal de éxito:**
+1. El Usuario registrado solicita actualizar su perfil.
+2. El sistema muestra los valores guardados: el alias y el correo electrónico solo como datos de consulta, y el nombre completo, el teléfono, la dirección postal y las preferencias dietéticas como datos modificables.
+3. El Usuario registrado modifica uno o varios de los datos modificables.
+4. El Usuario registrado solicita guardar los cambios.
+5. El sistema comprueba que el nombre completo y el teléfono no estén vacíos y que el teléfono cumpla las reglas de formato del registro.
+6. El sistema guarda conjuntamente los cambios.
+7. El sistema confirma que el perfil se ha actualizado.
 
-**Extensiones (flujos alternativos):** [Vincula cada variación a un paso. Indica cómo continúa o termina.]
+**Extensiones (flujos alternativos):**
 
-**Postcondiciones:** [Indica qué queda establecido con éxito y qué se conserva o cambia si el caso termina sin éxito o se cancela. Una consulta no requiere modificar datos para alcanzar su objetivo.]
+**5.a. Algún dato no es válido (nombre completo o teléfono vacío o formado solo por espacios, o teléfono con formato no válido):**
+1. El sistema identifica el campo, explica qué debe corregirse, conserva los valores introducidos y no guarda ningún cambio.
+2. El flujo de eventos vuelve al paso 3 para que el Usuario registrado corrija los datos y vuelva a solicitar el guardado.
 
-**Reglas y NFR pertinentes:** [Remite a los requisitos y actas que condicionan el comportamiento.]
+**\*.a. En cualquier momento antes de guardar, el Usuario registrado cancela la edición:**
+1. El sistema descarta los cambios de esa edición.
+2. El perfil conserva los valores anteriores y el caso de uso finaliza.
 
-**Preguntas abiertas:** [Registra solo las cuestiones necesarias que las fuentes no resuelvan. Si no hay preguntas para el alcance descrito, indícalo.]
+**6.a. El sistema no puede guardar los cambios:**
+1. El sistema informa del problema y no confirma la actualización.
+2. El sistema conserva los valores introducidos; los datos guardados permanecen sin cambios.
+3. El flujo de eventos vuelve al paso 4, para que el Usuario registrado pueda reintentar el guardado.
 
-### 6.2 Descripción detallada UC-21 — Buscar recetas
+**Postcondiciones:**
 
-**Identificador y nombre del caso de uso:** [Indica el caso.]
+Tras completar el caso de uso con éxito:
+- Los cambios válidos quedan guardados conjuntamente en el perfil.
+- El alias y el correo electrónico no han cambiado.
+- El Usuario registrado ha recibido la confirmación de que el perfil se ha actualizado.
 
-**Objetivo:** [Explica qué resultado pretende obtener el participante.]
+Si el caso de uso termina sin éxito o se cancela:
+- El perfil conserva los valores anteriores.
+- Si ha fallado el guardado, no se confirma la actualización y los valores introducidos siguen disponibles para reintentar.
+- No se modifican datos de salud.
 
-**Participantes:** [Indica el actor principal y los actores de apoyo, si los hay.]
+**Reglas y NFR pertinentes:** UR-03; FR-019, que excluye el alias y el correo de la modificación; NFR-010. Acta de UC-05, v1.1: el nombre completo y el teléfono son obligatorios, la dirección postal y las preferencias son opcionales, y las preferencias admiten ninguna, una o varias opciones (vegana, sin gluten y baja en carbohidratos). Las preferencias no son datos de salud ni sustituyen el registro de alergias. El teléfono conserva las reglas de formato del registro (acta de UR-01, apartado 2.1).
 
-**Precondiciones:** [Indica qué se da por cumplido al comenzar. Las comprobaciones que realiza el sistema pertenecen al flujo.]
-
-**Inicio:** [Indica qué acción o suceso inicia el caso.]
-
-**Escenario principal de éxito:** [Describe la secuencia entre los participantes y el sistema.]
-
-**Extensiones (flujos alternativos):** [Vincula cada variación a un paso. Indica cómo continúa o termina.]
-
-**Postcondiciones:** [Indica qué queda establecido con éxito y qué se conserva o cambia si el caso termina sin éxito o se cancela. Una consulta no requiere modificar datos para alcanzar su objetivo.]
-
-**Reglas y NFR pertinentes:** [Remite a los requisitos y actas que condicionan el comportamiento.]
-
-**Preguntas abiertas:** [Registra solo las cuestiones necesarias que las fuentes no resuelvan. Si no hay preguntas para el alcance descrito, indícalo.]
+**Preguntas abiertas:** Ninguna para el alcance descrito.
 
 ## 7 Continuidad entre iteraciones
 
@@ -278,5 +287,7 @@ Antes de publicar la solución de E2 se revisó su numeración. UC-15 representa
 UC-08 sigue retirado. Su código no se reutiliza. UC-22 a UC-30 no forman parte todavía de este estado del modelo; se incorporarán cuando se registre el resultado de E3.
 
 El modelo acumulado contiene dos vistas, siete actores y veinticinco casos de uso vigentes. Los casos de E1 conservan sus identificadores. Las siguientes iteraciones mantendrán los elementos que conserven el mismo objetivo.
+
+L06 incorpora las descripciones detalladas de UC-05 Actualizar perfil (apartado 6.1) y de UC-21 Buscar recetas (apartado 6.2). La descripción de UC-21 tiene un alcance parcial: no aplica el filtro de alergias del perfil ni cubre los demás filtros, las recomendaciones, el historial, los favoritos ni las acciones sobre la receta. Las descripciones de los demás casos de uso siguen pendientes. Los identificadores y los diagramas del modelo no cambian.
 
 Git conserva las revisiones registradas del modelo y sus imágenes. La evaluación de cada iteración identificará el commit de su estado revisado, conforme a la [guía de modelos](README.md). Cerrar una iteración no declara automáticamente una línea base.
