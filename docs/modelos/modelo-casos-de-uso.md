@@ -369,4 +369,6 @@ El modelo acumulado contiene dos vistas, siete actores y veinticinco casos de us
 
 L06 incorpora las descripciones detalladas de UC-05 Actualizar perfil (apartado 6.1) y de UC-21 Buscar recetas (apartado 6.2). La descripción de UC-21 tiene un alcance parcial: no aplica el filtro de alergias del perfil ni cubre los demás filtros, las recomendaciones, el historial, los favoritos ni las acciones sobre la receta. Las descripciones de los demás casos de uso siguen pendientes. Los identificadores y los diagramas del modelo no cambian.
 
+En L06 he utilizado IA como apoyo para revisar las descripciones de UC-05 y UC-21, con la autorización del profesor. He comprobado el resultado con las actas y la hoja de instrucciones.
+
 Git conserva las revisiones registradas del modelo y sus imágenes. La evaluación de cada iteración identificará el commit de su estado revisado, conforme a la [guía de modelos](README.md). Cerrar una iteración no declara automáticamente una línea base.
