@@ -86,3 +86,7 @@ La revisión abarca US-01, US-02 y US-03. «Aplicado» indica si se ha realizado
 ## Dudas pendientes
 
 Ninguna.
+
+## Nota tras la revisión INVEST
+
+Tras la revisión se mantiene la redacción de US-02 CA-02, que combina texto e ingrediente. Motivo: el acta exige que una receta cumpla todos los criterios combinados, y comprobar ese comportamiento obliga a usar dos criterios; por eso la fila «Independiente» declara que solo ese criterio depende de US-01, y las tres historias siguen ofreciendo un resultado útil por sí solas.
