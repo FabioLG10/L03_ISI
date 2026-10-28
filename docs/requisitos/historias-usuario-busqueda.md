@@ -61,6 +61,10 @@ Como persona usuaria registrada, quiero excluir los ingredientes que no quiero, 
 
 ### Criterios de aceptación
 
+## Dudas pendientes
+
+Ninguna.
+
 - **CA-01.** Dado que existen R1 con huevo y leche, R2 con huevo y almendra, y R3 con harina y azúcar, todas publicadas y validadas, cuando la persona excluye leche y almendra sin indicar otros criterios, entonces los resultados incluyen solo R3, porque R1 y R2 contienen alguno de los ingredientes excluidos.
 - **CA-02.** Dado que la persona ha seleccionado huevo para incluirlo, cuando lo selecciona también para excluirlo y solicita buscar, entonces el sistema señala el conflicto y no ejecuta la búsqueda hasta que lo corrija.
 - **CA-03.** Dado que ninguna receta publicada y validada contiene bacalao y no contiene sal, y el sistema dispone de «merluza» como alternativa, cuando la persona incluye bacalao y excluye sal, entonces el sistema indica que no hay resultados y propone la alternativa «merluza» manteniendo la exclusión de sal, sin proponer retirar la exclusión.
