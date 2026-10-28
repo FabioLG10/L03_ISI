@@ -82,3 +82,7 @@ La revisión abarca US-01, US-02 y US-03. «Aplicado» indica si se ha realizado
 | Pequeña | ¿Se centra cada historia en una única capacidad de alcance manejable? | Sí | Sí | Cada historia se centra en un criterio de búsqueda y deja fuera los filtros adicionales, las recomendaciones y los favoritos. |
 | Comprobable | ¿Los criterios de aceptación de cada historia describen acciones y resultados observables que permiten distinguir un comportamiento correcto de uno incorrecto? | Sí | Sí | Los nueve criterios usan datos concretos, una acción y un resultado observable, como las recetas que aparecen o no, el mensaje de conflicto y las sugerencias. |
 
+
+## Dudas pendientes
+
+Ninguna.
